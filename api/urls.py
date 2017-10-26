@@ -5,5 +5,5 @@ from api import views
 
 
 urlpatterns = [
-    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
