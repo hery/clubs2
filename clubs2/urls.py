@@ -1,20 +1,18 @@
 
 from django.conf.urls import url, include
-from django.contrib import admin
-from rest_framework.urlpatterns import format_suffix_patterns
+# from django.contrib import admin
+from rest_framework.routers import DefaultRouter
 
 from api import views
 
 
-urlpatterns = format_suffix_patterns([
-    url(r'^api/$', views.api_root),
+router = DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'teachers', views.TeacherViewSet)
 
-    url(r'^api/users/$', views.UserList.as_view(), name='user-list'),
-    url(r'^api/users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view(), name='user-detail'),
-
-    url(r'^api/teachers/$', views.TeacherList.as_view(), name='teacher-list'),
-    url(r'^api/teachers/(?P<pk>[0-9]+)/$', views.TeacherDetail.as_view(), name='teacher-detail'),
+urlpatterns = [
+    url(r'^', include(router.urls))
 
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^admin/', admin.site.urls),
-])
+]
